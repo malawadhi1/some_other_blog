@@ -1,6 +1,6 @@
 from django.conf.urls import url
-from posts import views
+from . import views
 
 urlpatterns = [
-    url(r'^whatever/$', views.post_create, name="whatever"),
+    url(r'^post_stuff/$', views.post, name="stuff"),
 ]
