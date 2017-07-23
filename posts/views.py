@@ -6,6 +6,7 @@ def post_create(request):
 	obj = get_object_or_404(Post, id=2)
 	context = {
 		"instance": obj,
+		"user": request.user,
 
 	}
-	return render(requesr, 'whatever.html', context)
+	return render(request, 'whatever.html', context)
