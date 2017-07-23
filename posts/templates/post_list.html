@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Lists</title>
+</head>
+<body>
+	
+	<ol>
+	{% for instance in obj_list %}
+		<a href="/posts/detail/{{instance.id}}"><li> {{instance.title}} </li></a>
+	{% endfor %}
+	</ol>
+</body>
+</html>
