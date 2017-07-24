@@ -4,11 +4,16 @@
 	<title>Lists</title>
 </head>
 <body>
+
+<h2> List of IDs </h2>
+<h5>Please choose an Post:</h5>
 	
 	<ol>
-	{% for instance in obj_list %}
-		<a href="/posts/detail/{{instance.id}}"><li> {{instance.title}} </li></a>
+	{% for x in obj_list %}
+		<a href="{{x.get_absolute_url}}"><li> {{x.title}} </li></a>
+		<li>{{x.timestamp}}</li>
 	{% endfor %}
+
 	</ol>
 </body>
 </html>

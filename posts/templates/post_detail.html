@@ -4,14 +4,18 @@
 	<title>Create Page</title>
 </head>
 <body>
-	<h1>{{user}}</h1>
+
+	<h3>User: {{user}}</h3>
 
 	<ol>
 
-		<li>{{instance.id}}</li>
-		<li>{{instance.title}}</li>
-		<li>{{instance.content}}</li>
-		
+		<li>{{x.id}}</li>
+		<li>{{x.title}}</li>
+		<li>{{x.content}}</li>
+
 	</ol>
+
+<a href="{% url 'posts:list' %}">Go back to list </a>		
+
 </body>
 </html>
