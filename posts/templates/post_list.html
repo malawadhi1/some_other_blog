@@ -4,13 +4,13 @@
 
 {% block content %}
 
-<h1> List of IDs </h1>
-<h5>Please choose a Post:</h5>
+
+<h2>Please choose a Post:</h2>
 	
 	<ol>
 	{% for x in obj_list %}
 		<a href="{{x.get_absolute_url}}"><li> {{x.title}} </li></a>
-		<li>{{x.timestamp}}</li>
+		{# <li>{{x.timestamp}}</li> #}
 	{% endfor %}
 
 	</ol>
