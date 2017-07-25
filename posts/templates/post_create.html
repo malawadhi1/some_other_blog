@@ -1,16 +1,14 @@
-<!DOCTYPE html>
-<html>
-<head>
-	<title>So bored</title>
-</head>
-<body>
+{% extends "base.html" %}
+
+{% block content %}
+
+{% block head_title %}Create Page{% endblock head_title %}
+
 	<form method="POST" action="{% url 'posts:create' %}"
 	<form method="POST">
 		{% csrf_token %}
 		{{form.as_p}}
 		<input type="submit" value="Create a Post">
-<a href="{% url 'posts:list' %}">Go back to list </a>		
+<a href="{% url 'posts:list' %}">Go back to list </a>	
 
-	</form>
-</body>
-</html>
+{% endblock content %}

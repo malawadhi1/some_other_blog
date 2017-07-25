@@ -1,9 +1,8 @@
-<!DOCTYPE html>
-<html>
-<head>
-	<title>Create Page</title>
-</head>
-<body>
+{% extends "base.html" %}
+
+{% block head_title %}Post Detail{% endblock head_title %}
+
+{% block content %}
 
 	<h3>User: {{user}}</h3>
 
@@ -17,5 +16,4 @@
 
 <a href="{% url 'posts:list' %}">Go back to list </a>		
 
-</body>
-</html>
+{% endblock content %}
