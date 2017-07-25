@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Update</title>
+</head>
+<body>
+	<form method="POST" action="{% url 'posts:update' post_id=post_object.id %}"
+	<form method="POST">
+		{% csrf_token %}
+		{{form.as_p}}
+		<input type="submit" value="Update Post">
+<a href="{% url 'posts:list' %}">Cancel and Go back to list </a>		
+
+	</form>
+</body>
+</html>
