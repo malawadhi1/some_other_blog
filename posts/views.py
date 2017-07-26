@@ -9,7 +9,7 @@ from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 def post_list(request):
 	obj_list = Post.objects.all() #.order_by("-timestamp", "-updated")
 
-	paginator = Paginator(obj_list, 4) # Show 4 contacts per page
+	paginator = Paginator(obj_list, 6) # Show 4 contacts per page
 
 	page = request.GET.get('page')
 	try:
@@ -39,10 +39,10 @@ def post_detail(request, post_id):
 	return render(request, 'post_detail.html', context)
 
 def post_create(request):
-	form = PostForm(request.POST or None)
+	form = PostForm(request.POST or None, request.FILES or None)
 	if form.is_valid():
 		form.save()
-		messages.success(request, "Congratulations on creating an object")
+		messages.success(request, "Congratulations on creating a Post")
 		return redirect("posts:list")
 	context = {
 		"form":form,
@@ -51,10 +51,10 @@ def post_create(request):
 
 def post_update(request, post_id):
 	post_object = get_object_or_404(Post, id=post_id)
-	form = PostForm(request.POST or None, instance=post_object)
+	form = PostForm(request.POST or None,  request.FILES or None, instance=post_object)
 	if form.is_valid():
 		form.save()
-		messages.success(request, "Giving it a second thought?")
+		messages.success(request, "Your Post Has Been Updated")
 
 		return redirect("posts:list")
 	context = {
@@ -65,6 +65,6 @@ def post_update(request, post_id):
 
 def post_delete(request, post_id):
 	Post.objects.get(id=post_id).delete()
-	messages.warning(request, "Post has been deleted")
+	messages.warning(request, "Post Has Been Deleted")
 	return redirect("posts:list")
 
