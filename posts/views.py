@@ -5,7 +5,7 @@ from django.shortcuts import get_object_or_404
 from django.contrib import messages
 
 def post_list(request):
-	obj_list = Post.objects.all()
+	obj_list = Post.objects.all() #.order_by("-timestamp", "-updated")
 	context = {
 		"obj_list": obj_list,
 		
