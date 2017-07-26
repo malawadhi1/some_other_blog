@@ -8,7 +8,7 @@
 <h2>Please choose a Post:</h2>
 	
 <div class="row">
-{% for x in obj_list %}
+{% for x in post_list %}
 	<div class="col-sm-6">
 	  <div class="thumbnail">
 			{#       <img src="..." alt="..."> #}
@@ -25,6 +25,22 @@
 	</div>
 {% endfor %}
 
+</div>
+
+<div class="pagination">
+    <span class="step-links">
+        {% if post_list.has_previous %}
+            <a href="?page={{ post_list.previous_page_number }}">previous</a>
+        {% endif %}
+
+        <span class="current">
+            Page {{ post_list.number }} of {{ post_list.paginator.num_pages }}
+        </span>
+
+        {% if post_list.has_next %}
+            <a href="?page={{ post_list.next_page_number }}">next</a>
+        {% endif %}
+    </span>
 </div>
 
 {% endblock content %}
