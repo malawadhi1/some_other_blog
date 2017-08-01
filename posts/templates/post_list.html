@@ -4,8 +4,14 @@
 
 {% block content %}
 
-<a href ="{% url 'posts:login'%}" class="btn btn-primary">Login</a>
-<a href ="{% url 'posts:logout'%}" class="btn btn-primary">Logout</a>
+<br>
+{% if not request.user.is_authenticated %}
+<a href ="{% url 'posts:login'%}" class="btn btn-success">Login</a>
+{% endif %}
+
+{% if request.user.is_authenticated %}
+<a href ="{% url 'posts:logout'%}" class="btn btn-danger">Logout</a>
+{% endif %}
 
 <br>
 <h2>Please choose a Post:</h2>

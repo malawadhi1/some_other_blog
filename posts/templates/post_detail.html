@@ -1,6 +1,7 @@
 {% extends "base.html" %}
 {% load urlify %}
 
+
 {% block head_title %}Post Detail{% endblock head_title %}
 
 {% block content %}
@@ -10,8 +11,8 @@
 
 <div class="row">
 	<div class="col-sm-6">
-	  <div class="thumbnail">
-		  	{% if instance.image %}
+		<div class="thumbnail">
+			{% if instance.image %}
 				<img src="{{instance.image.url}}" class="img-responsive">
 			{% endif %}	
 			<div class="caption">
@@ -32,12 +33,15 @@
 
 				<a href="https://www.linkedin.com/shareArticle?mini=true&url={{request.build_absolute_uri}}&title={{instance.title|urlify}}&summary={{instance.content|truncatechars:35|urlify}}&source={{request.build_absolute_uri}}">
 				Share on Linkedin
+				</a>
 
 			</div>
+			{% include "django_comments.html" %}
+			<br>
 		</div>
 	</div>
 </div>
 
-{# <br> #}<a href="{% url 'posts:list' %}">Go back to the list page </a><br>		
+{# <br> #}<a href="{% url 'posts:list' %}" class="btn btn-success">Go back to the list page </a><br>		
 
 {% endblock content %}
