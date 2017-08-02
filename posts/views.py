@@ -1,14 +1,34 @@
 from django.shortcuts import render, redirect
-from .models import Post
+from .models import Post, Like
 from .forms import PostForm, UserSignUp, UserLogin
 from django.shortcuts import get_object_or_404
 from django.contrib import messages
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from urllib.parse import quote
-from django.http import Http404
+from django.http import Http404, JsonResponse
 from django.utils import timezone
 
 from django.contrib.auth import authenticate, login, logout
+
+
+def like_button(request, post_id):
+	obj = Post.objects.get(id=post_id)
+
+	like, created = Like.objects.get_or_create(user=request.user, post=obj)
+
+	if created:
+		action = "Like"
+	else:
+		like.delete()
+		action="unlike"
+
+	post_like_count = obj.like_set.all().count()
+	context = {
+		"action": action,
+		"like_count": post_like_count,
+	}
+
+	return JsonResponse(context, safe=False)
 
 
 def userlogout(request):
@@ -87,9 +107,20 @@ def post_list(request):
 
 def post_detail(request, slug):
 	obj = get_object_or_404(Post, slug = slug)
+	
+	if request.user.is_authenticated():
+		if Like.objects.filter(post=obj, user=request.user).exists():
+			liked = True
+		else:
+			liked = False
+
+	post_like_count = obj.like_set.all().count()
+
 	context = {
 		"instance": obj,
 		"user": request.user,
+	    "post_like_count":post_like_count,
+    	"liked":liked
 
 	}
 	return render(request, 'post_detail.html', context)

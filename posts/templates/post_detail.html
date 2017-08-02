@@ -22,30 +22,56 @@
 					<a href ="{% url 'posts:update' slug=instance.slug %}" class="btn btn-success">Edit</a>
 					<a href ="{% url 'posts:delete' slug=instance.slug %}" class="btn btn-danger">Delete</a>
 				</p>
-				<a href="https://www.facebook.com/sharer/sharer.php?u={{request.build_absolute_url}}">
+				<br><a href="https://www.facebook.com/sharer/sharer.php?u={{request.build_absolute_url}}">
 				Share on Facebook
 				</a>
 
-				<a href="https://twitter.com/
+				<br><a href="https://twitter.com/
 				home?status={{instance.content|urlify|truncatechars:50}}%20{{request.build_absolute_url}}">
 				Share on Twitter
 				</a>
 
-				<a href="https://www.linkedin.com/shareArticle?mini=true&url={{request.build_absolute_uri}}&title={{instance.title|urlify}}&summary={{instance.content|truncatechars:35|urlify}}&source={{request.build_absolute_uri}}">
+				<br><a href="https://www.linkedin.com/shareArticle?mini=true&url={{request.build_absolute_uri}}&title={{instance.title|urlify}}&summary={{instance.content|truncatechars:35|urlify}}&source={{request.build_absolute_uri}}">
 				Share on Linkedin
 				</a>
-
 			</div>
-			{% include "django_comments.html" %}
-			<button class ="btn">
-				<span id="likes_count">0</span>
-				<span id="heart" class="glyphicon glyphicon-heart" aria-hidden="true"></span>
-			</button>
+				
+				<br><button class ="btn" onclick="ajax_like()">
+					<span id="likes_count">{{like_count}}</span>
+					<span id="heart" class="glyphicon glyphicon-heart {% if liked %} text-danger {% endif %}" aria-hidden="true"></span>
+				</button> <br>
+
+				
+			<br>{% include "django_comments.html" %}
+			
 			<br>
 		</div>
 	</div>
 </div>
 
 {# <br> #}<a href="{% url 'posts:list' %}" class="btn btn-success">Go back to the list page </a><br>		
+
+<script>
+function ajax_like()
+{
+	console.log("Like/Unlike clicked!");
+	$.ajax({
+		type:'GET',
+		url: '{% url "posts:like_button" post_id=instance.id %}',
+		error: function(){
+			console.log('noob');
+		},
+		success: function(data){
+			 $("#likes_count").text(data.like_count);
+
+				if(data.action==="like"){
+					$("#heart").addClass("text-danger");
+				}else{
+					$("#heart").removeClass("text-danger");
+				}  
+			},
+		});
+	}
+</script>
 
 {% endblock content %}
