@@ -4,6 +4,12 @@ from django.template.defaultfilters import slugify
 from django.db.models.signals import post_save
 from django.contrib.auth.models import User
 
+
+class Like(models.Model)
+	user = models.ForeignKey(User)
+	post = models.ForeignKet(Post)
+	created = models.DateTimeField(auto_now_add=True)
+
 class Post(models.Model):
 	author = models.ForeignKey(User, default=1)
 	title = models.CharField(max_length=100)
