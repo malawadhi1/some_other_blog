@@ -64,7 +64,7 @@ function ajax_like()
 		success: function(data){
 			 $("#likes_count").text(data.like_count);
 
-				if(data.action==="like"){
+				if(data.action==="Like"){
 					$("#heart").addClass("text-danger");
 				}else{
 					$("#heart").removeClass("text-danger");

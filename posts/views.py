@@ -119,7 +119,7 @@ def post_detail(request, slug):
 	context = {
 		"instance": obj,
 		"user": request.user,
-	    "post_like_count":post_like_count,
+	    "like_count":post_like_count,
     	"liked":liked
 
 	}
