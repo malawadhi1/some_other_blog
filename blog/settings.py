@@ -23,9 +23,9 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SECRET_KEY = '7iq+$d2#jj^lj+!4$#=g)@jkh60wbj$_f_#k#etgff(4r9mz%c'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
 
-ALLOWED_HOSTS = ['188.166.244.213',]
+ALLOWED_HOSTS = ['188.166.244.213','127.0.0.1']
 
 
 # Application definition
@@ -40,6 +40,8 @@ INSTALLED_APPS = [
     'django.contrib.sites',
     'posts',   
     'django_comments',
+    'rest_framework',
+    'api',
 ]
 
 SITE_ID = 1
@@ -78,27 +80,24 @@ WSGI_APPLICATION = 'blog.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/1.11/ref/settings/#databases
 
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+    }
+}
+
 # DATABASES = {
 #     'default': {
 #         'ENGINE': 'django.db.backends.postgresql_psycopg2',
 #         'NAME': 'django',
 #         'USER': 'django',
-#         'PASSWORD': 'c2f9d37bbcfafea2f34dbd4bbdf761de'
-
+#         'PASSWORD': '979602d02a53cc4b4db02b501d021f85',
+#         'HOST': 'localhost',
+#         'PORT': '',
+        
 #     }
 # }
-
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': 'django',
-        'USER': 'django',
-        'PASSWORD': '979602d02a53cc4b4db02b501d021f85',
-        'HOST': 'localhost',
-        'PORT': '',
-        
-    }
-}
 
 
 # Password validation
