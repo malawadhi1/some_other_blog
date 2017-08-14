@@ -12,6 +12,7 @@ urlpatterns = [
 	url(r'^comments/', include('django_comments.urls')),
 	url(r'^api/', include('api.urls', namespace="api")),
 	url(r'^googleapp/', include('googleapp.urls', namespace="googleapp")),
+	url(r'^accounts/', include('allauth.urls')),
 ]
 
 if settings.DEBUG:

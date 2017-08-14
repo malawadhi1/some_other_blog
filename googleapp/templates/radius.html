@@ -1,0 +1,40 @@
+{% extends "base.html" %}
+
+{% block content %}
+	<h1>STATUS: {{response.status}} </h1>
+
+	<form action="{% url 'googleapp:radius' %}" method="GET">
+		<input type="text" name="radius" placeholder="search for a place">
+		<input type="hidden" name="location" value="" id="location">
+		<input type="submit" value="Search" class="btn btn-primary">
+	</form>
+
+	
+	<table class="table"> 
+		{% for result in response.results  %}
+			<tr>
+				<td>{{result.name}}</td>
+			</tr>		
+		{% endfor %}
+	</table> 
+
+<script>
+var options = {
+	enableHighAccuracy: true,
+	timeout: 5000,
+	maximumAge: 0
+};
+
+function success(pos) {
+	var crd = pos.coords;
+	$("#location").val(crd.latitude+','+crd.longitude);
+};
+
+function error(err) {
+	console.warn(`ERROR(${err.code}): ${err.message}`);
+};
+
+navigator.geolocation.getCurrentPosition(success, error, options);
+</script>
+
+{% endblock content %}

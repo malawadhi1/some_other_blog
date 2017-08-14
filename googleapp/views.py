@@ -23,3 +23,13 @@ def place_detail(request):
 	response = requests.get(url)
 	# return JsonResponse(response.json(), safe=False)
 	return render(request, 'details.html', {'response': response.json(), 'key': key})
+
+def radius_search(request):
+	api_key = "AIzaSyA_dkmKbyYi5XTL_mjZTD1bgmlMMp4obUY"
+	location = request.GET.get("location")
+	radius = request.GET.get("radius",'')
+	url = 'https://maps.googleapis.com/maps/api/place/nearbysearch/json?key=%s&location=%s&radius=%s'%(api_key, location, radius)
+	response = requests.get(url)
+
+	# return JsonResponse(response.json(), safe=False)
+	return render(request, 'radius.html', {'response': response.json()})
